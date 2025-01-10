@@ -1,0 +1,51 @@
+[alembic_version]
+    *version_num {label:"VARCHAR(32)"}
+[category]
+    *id {label:"INTEGER"}
+    name {label:"VARCHAR(50)"}
+[merchandise]
+    *id {label:"INTEGER"}
+    category_id {label:"INTEGER"}
+    description {label:"TEXT"}
+    image_path {label:"VARCHAR(255)"}
+    name {label:"VARCHAR(255)"}
+    price {label:"DECIMAL(10, 2)"}
+    product_code {label:"VARCHAR(50)"}
+    size {label:"VARCHAR(50)"}
+    timestamp {label:"DATETIME"}
+[orders]
+    *id {label:"INTEGER"}
+    price {label:"DECIMAL(10, 2)"}
+    product_id {label:"INTEGER"}
+    purchase_date {label:"DATETIME"}
+    quantity {label:"INTEGER"}
+    user_id {label:"INTEGER"}
+[users]
+    *id {label:"INTEGER"}
+    email {label:"VARCHAR(255)"}
+    isAdmin {label:"VARCHAR(10)"}
+    password {label:"VARCHAR(255)"}
+    payment {label:"FLOAT"}
+    username {label:"VARCHAR(100)"}
+[productreview]
+    *id {label:"INTEGER"}
+    product_id {label:"INTEGER"}
+    rating {label:"INTEGER"}
+    review_text {label:"TEXT"}
+    user_id {label:"INTEGER"}
+[sales]
+    *id {label:"INTEGER"}
+    delivery_location {label:"VARCHAR(255)"}
+    phonenumber {label:"VARCHAR(255)"}
+    price {label:"DECIMAL(10, 2)"}
+    product_code {label:"VARCHAR(50)"}
+    quantity {label:"INTEGER"}
+    timestamp {label:"DATETIME"}
+    user_id {label:"INTEGER"}
+    username {label:"VARCHAR(100)"}
+category."id" ?--* merchandise."category_id"
+users."id" ?--* orders."user_id"
+merchandise."id" ?--* orders."product_id"
+users."id" 1--* productreview."user_id"
+merchandise."id" 1--* productreview."product_id"
+users."id" ?--* sales."user_id"

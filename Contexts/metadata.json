@@ -1,0 +1,381 @@
+{
+    "alembic_version": {
+        "columns": [
+            {
+                "Field": "version_num",
+                "Type": "varchar(32)",
+                "Null": "NO",
+                "Key": "PRI",
+                "Default": null,
+                "Extra": ""
+            }
+        ],
+        "relationships": []
+    },
+    "category": {
+        "columns": [
+            {
+                "Field": "id",
+                "Type": "int",
+                "Null": "NO",
+                "Key": "PRI",
+                "Default": null,
+                "Extra": "auto_increment"
+            },
+            {
+                "Field": "name",
+                "Type": "varchar(50)",
+                "Null": "NO",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            }
+        ],
+        "relationships": []
+    },
+    "merchandise": {
+        "columns": [
+            {
+                "Field": "id",
+                "Type": "int",
+                "Null": "NO",
+                "Key": "PRI",
+                "Default": null,
+                "Extra": "auto_increment"
+            },
+            {
+                "Field": "name",
+                "Type": "varchar(255)",
+                "Null": "NO",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "description",
+                "Type": "text",
+                "Null": "YES",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "price",
+                "Type": "decimal(10,2)",
+                "Null": "NO",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "image_path",
+                "Type": "varchar(255)",
+                "Null": "YES",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "timestamp",
+                "Type": "datetime",
+                "Null": "YES",
+                "Key": "",
+                "Default": "CURRENT_TIMESTAMP",
+                "Extra": "DEFAULT_GENERATED"
+            },
+            {
+                "Field": "product_code",
+                "Type": "varchar(50)",
+                "Null": "NO",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "size",
+                "Type": "varchar(50)",
+                "Null": "YES",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "category_id",
+                "Type": "int",
+                "Null": "YES",
+                "Key": "MUL",
+                "Default": null,
+                "Extra": ""
+            }
+        ],
+        "relationships": [
+            {
+                "table": "merchandise",
+                "column": "category_id",
+                "referenced_table": "category",
+                "referenced_column": "id"
+            }
+        ]
+    },
+    "orders": {
+        "columns": [
+            {
+                "Field": "id",
+                "Type": "int",
+                "Null": "NO",
+                "Key": "PRI",
+                "Default": null,
+                "Extra": "auto_increment"
+            },
+            {
+                "Field": "user_id",
+                "Type": "int",
+                "Null": "YES",
+                "Key": "MUL",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "product_id",
+                "Type": "int",
+                "Null": "YES",
+                "Key": "MUL",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "price",
+                "Type": "decimal(10,2)",
+                "Null": "YES",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "purchase_date",
+                "Type": "datetime",
+                "Null": "YES",
+                "Key": "",
+                "Default": "CURRENT_TIMESTAMP",
+                "Extra": "DEFAULT_GENERATED"
+            },
+            {
+                "Field": "quantity",
+                "Type": "int",
+                "Null": "YES",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            }
+        ],
+        "relationships": [
+            {
+                "table": "orders",
+                "column": "user_id",
+                "referenced_table": "users",
+                "referenced_column": "id"
+            },
+            {
+                "table": "orders",
+                "column": "product_id",
+                "referenced_table": "merchandise",
+                "referenced_column": "id"
+            }
+        ]
+    },
+    "productreview": {
+        "columns": [
+            {
+                "Field": "id",
+                "Type": "int",
+                "Null": "NO",
+                "Key": "PRI",
+                "Default": null,
+                "Extra": "auto_increment"
+            },
+            {
+                "Field": "product_id",
+                "Type": "int",
+                "Null": "NO",
+                "Key": "MUL",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "user_id",
+                "Type": "int",
+                "Null": "NO",
+                "Key": "MUL",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "rating",
+                "Type": "int",
+                "Null": "NO",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "review_text",
+                "Type": "text",
+                "Null": "NO",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            }
+        ],
+        "relationships": [
+            {
+                "table": "productreview",
+                "column": "product_id",
+                "referenced_table": "merchandise",
+                "referenced_column": "id"
+            },
+            {
+                "table": "productreview",
+                "column": "user_id",
+                "referenced_table": "users",
+                "referenced_column": "id"
+            }
+        ]
+    },
+    "sales": {
+        "columns": [
+            {
+                "Field": "id",
+                "Type": "int",
+                "Null": "NO",
+                "Key": "PRI",
+                "Default": null,
+                "Extra": "auto_increment"
+            },
+            {
+                "Field": "product_code",
+                "Type": "varchar(50)",
+                "Null": "NO",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "username",
+                "Type": "varchar(100)",
+                "Null": "NO",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "price",
+                "Type": "decimal(10,2)",
+                "Null": "NO",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "delivery_location",
+                "Type": "varchar(255)",
+                "Null": "NO",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "timestamp",
+                "Type": "datetime",
+                "Null": "NO",
+                "Key": "",
+                "Default": "CURRENT_TIMESTAMP",
+                "Extra": "DEFAULT_GENERATED"
+            },
+            {
+                "Field": "phonenumber",
+                "Type": "varchar(255)",
+                "Null": "NO",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "quantity",
+                "Type": "int",
+                "Null": "YES",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "user_id",
+                "Type": "int",
+                "Null": "YES",
+                "Key": "MUL",
+                "Default": null,
+                "Extra": ""
+            }
+        ],
+        "relationships": [
+            {
+                "table": "sales",
+                "column": "user_id",
+                "referenced_table": "users",
+                "referenced_column": "id"
+            }
+        ]
+    },
+    "users": {
+        "columns": [
+            {
+                "Field": "id",
+                "Type": "int",
+                "Null": "NO",
+                "Key": "PRI",
+                "Default": null,
+                "Extra": "auto_increment"
+            },
+            {
+                "Field": "email",
+                "Type": "varchar(255)",
+                "Null": "YES",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "password",
+                "Type": "varchar(255)",
+                "Null": "YES",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "username",
+                "Type": "varchar(100)",
+                "Null": "YES",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "isAdmin",
+                "Type": "varchar(10)",
+                "Null": "YES",
+                "Key": "",
+                "Default": null,
+                "Extra": ""
+            },
+            {
+                "Field": "payment",
+                "Type": "float",
+                "Null": "YES",
+                "Key": "",
+                "Default": "0",
+                "Extra": ""
+            }
+        ],
+        "relationships": []
+    }
+}
